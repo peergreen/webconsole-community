@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <parent>
+    <artifactId>webconsole-pom</artifactId>
+    <groupId>com.peergreen.webconsole</groupId>
+    <version>1.0.0-SNAPSHOT</version>
+    <relativePath>../webconsole-pom/pom.xml</relativePath>
+  </parent>
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>web-console-community</artifactId>
+  <name>Peergreen Web Console Community Edition</name>
+  <packaging>bundle</packaging>
+
+  <dependencies>
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>web-console-api</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>web-console-core</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.ow2.spec.ee</groupId>
+      <artifactId>ow2-servlet-3.0-spec</artifactId>
+      <version>1.0.12</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.felix</groupId>
+      <artifactId>org.apache.felix.ipojo.annotations</artifactId>
+      <version>${ipojo.version}</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.osgi</groupId>
+      <artifactId>org.osgi.compendium</artifactId>
+      <version>4.0.0</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <!-- Extensions to add to web console community edition -->
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>home-scope</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>system-scope</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>runtime</scope>
+    </dependency>
+
+    <!-- Runtime dependencies -->
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>vaadin-7.1.0.beta1</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.vaadin</groupId>
+      <artifactId>vaadin-shared-deps</artifactId>
+      <version>1.0.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.jsoup</groupId>
+      <artifactId>jsoup</artifactId>
+      <version>1.6.3</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.atmosphere</groupId>
+      <artifactId>atmosphere-runtime</artifactId>
+      <version>1.0.12</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-simple</artifactId>
+      <version>1.7.2</version>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.slf4j</groupId>
+      <artifactId>slf4j-api</artifactId>
+      <version>1.7.2</version>
+      <scope>runtime</scope>
+    </dependency>
+  </dependencies>
+</project>
