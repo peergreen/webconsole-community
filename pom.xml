@@ -96,4 +96,30 @@
       <scope>runtime</scope>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+        <version>${maven-bundle-plugin.version}</version>
+        <extensions>true</extensions>
+        <configuration>
+          <instructions>
+            <_include>-target/classes/META-INF/${project.artifactId}.bnd</_include>
+            <_plugin>
+              org.apache.felix.ipojo.bnd.PojoizationPlugin;metadata=${basedir}/src/main/resources/metadata.xml;use-local-schemas=true;include-embed-bundles=true
+            </_plugin>
+          </instructions>
+        </configuration>
+        <dependencies>
+          <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>bnd-ipojo-plugin</artifactId>
+            <version>${ipojo.version}</version>
+          </dependency>
+        </dependencies>
+      </plugin>
+    </plugins>
+  </build>
 </project>
