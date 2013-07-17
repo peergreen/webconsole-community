@@ -57,6 +57,12 @@
       <version>1.0.0-SNAPSHOT</version>
       <scope>runtime</scope>
     </dependency>
+    <dependency>
+      <groupId>com.peergreen.webconsole</groupId>
+      <artifactId>deployment-scope</artifactId>
+      <version>1.0.0-SNAPSHOT</version>
+      <scope>runtime</scope>
+    </dependency>
 
     <!-- Runtime dependencies -->
     <dependency>
