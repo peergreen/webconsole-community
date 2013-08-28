@@ -1,2 +1,2 @@
-Import-Package *;resolution:=optional
+Import-Package org.slf4j;resolution:=optional,*;resolution:=optional
 Embed-Dependency *;scope=compile|runtime
