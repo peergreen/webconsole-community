@@ -67,7 +67,7 @@
     <!-- Runtime dependencies -->
     <dependency>
       <groupId>com.peergreen.webconsole</groupId>
-      <artifactId>vaadin-7.1.0</artifactId>
+      <artifactId>vaadin-7.1.3</artifactId>
       <version>1.0.0-SNAPSHOT</version>
       <scope>runtime</scope>
     </dependency>
