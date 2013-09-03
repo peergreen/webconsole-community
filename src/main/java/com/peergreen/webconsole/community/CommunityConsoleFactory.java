@@ -1,9 +1,10 @@
 package com.peergreen.webconsole.community;
 
-import javax.servlet.ServletException;
-
 import com.peergreen.webconsole.Constants;
+import com.peergreen.webconsole.IConsole;
+import com.peergreen.webconsole.core.osgi.VaadinOSGiServlet;
 import com.peergreen.webconsole.core.vaadin7.UIProviderFactory;
+import com.vaadin.server.UIProvider;
 import org.apache.felix.ipojo.annotations.Bind;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -13,10 +14,7 @@ import org.apache.felix.ipojo.annotations.Unbind;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
-import com.peergreen.webconsole.IConsole;
-import com.peergreen.webconsole.core.osgi.VaadinOSGiServlet;
-import com.vaadin.server.UIProvider;
-
+import javax.servlet.ServletException;
 import java.util.Dictionary;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
@@ -33,13 +31,13 @@ public class CommunityConsoleFactory {
      * Http Service
      */
     @Requires
-    HttpService httpService;
+    private HttpService httpService;
 
     /**
      * UI provider factory
      */
     @Requires
-    UIProviderFactory uiProviderFactory;
+    private UIProviderFactory uiProviderFactory;
 
     private List<String> aliases = new CopyOnWriteArrayList<>();
 
@@ -63,9 +61,7 @@ public class CommunityConsoleFactory {
             String alias = (String) properties.get(Constants.CONSOLE_ALIAS);
             httpService.registerServlet(alias, servlet, null, null);
             aliases.add(alias);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (NamespaceException e) {
+        } catch (ServletException | NamespaceException e) {
             // ignore update
         }
     }
