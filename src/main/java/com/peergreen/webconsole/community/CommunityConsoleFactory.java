@@ -5,6 +5,7 @@ import com.peergreen.webconsole.IConsole;
 import com.peergreen.webconsole.core.osgi.VaadinOSGiServlet;
 import com.peergreen.webconsole.core.vaadin7.UIProviderFactory;
 import com.vaadin.server.UIProvider;
+
 import org.apache.felix.ipojo.annotations.Bind;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
@@ -21,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Community Console factory
+ *
  * @author Mohammed Boukada
  */
 @Component(publicFactory = false)
@@ -43,6 +45,7 @@ public class CommunityConsoleFactory {
 
     /**
      * Bind a console
+     *
      * @param console
      */
     @Bind(aggregate = true, optional = true)
@@ -68,6 +71,7 @@ public class CommunityConsoleFactory {
 
     /**
      * Unbind a console
+     *
      * @param console
      */
     @Unbind
