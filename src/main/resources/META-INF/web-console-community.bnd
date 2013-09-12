@@ -1,2 +1,10 @@
 Import-Package org.slf4j;resolution:=optional,*;resolution:=optional
 Embed-Dependency *;scope=compile|runtime
+Export-Package com.peergreen.webconsole,\
+               com.peergreen.webconsole.exception,\
+               com.peergreen.webconsole.navigator,\
+               com.peergreen.webconsole.resource,\
+               com.peergreen.webconsole.utils.*,\
+               com.peergreen.webconsole.vaadin.*,\
+               com.vaadin.*,|
+               VAADIN.*
