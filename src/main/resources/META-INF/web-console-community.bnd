@@ -1,10 +1,14 @@
 Import-Package org.slf4j;resolution:=optional,*;resolution:=optional
-Embed-Dependency *;scope=compile|runtime
+
+Embed-Dependency *;scope=compile|runtime,\
+                 artifactId=indexer-core;inline=false
+
 Export-Package com.peergreen.webconsole,\
                com.peergreen.webconsole.exception,\
                com.peergreen.webconsole.navigator,\
                com.peergreen.webconsole.resource,\
                com.peergreen.webconsole.utils.*,\
                com.peergreen.webconsole.vaadin.*,\
-               com.vaadin.*,|
+               com.vaadin.*,\
                VAADIN.*
+
