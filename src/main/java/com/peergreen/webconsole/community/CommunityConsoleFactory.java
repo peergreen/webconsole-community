@@ -11,11 +11,10 @@
 
 package com.peergreen.webconsole.community;
 
-import com.peergreen.webconsole.Constants;
-import com.peergreen.webconsole.IConsole;
-import com.peergreen.webconsole.core.osgi.VaadinOSGiServlet;
-import com.peergreen.webconsole.core.vaadin7.UIProviderFactory;
-import com.vaadin.server.UIProvider;
+import javax.servlet.ServletException;
+import java.util.Dictionary;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import org.apache.felix.ipojo.annotations.Bind;
 import org.apache.felix.ipojo.annotations.Component;
@@ -26,10 +25,11 @@ import org.apache.felix.ipojo.annotations.Unbind;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
-import javax.servlet.ServletException;
-import java.util.Dictionary;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
+import com.peergreen.webconsole.Constants;
+import com.peergreen.webconsole.IConsole;
+import com.peergreen.webconsole.core.osgi.VaadinOSGiServlet;
+import com.peergreen.webconsole.core.vaadin7.UIProviderFactory;
+import com.vaadin.server.UIProvider;
 
 /**
  * Community Console factory
@@ -61,11 +61,11 @@ public class CommunityConsoleFactory {
      */
     @Bind(aggregate = true, optional = true)
     public void bindConsole(IConsole console, Dictionary properties) {
-        if (!Constants.SECURED_CONSOLE_PID.equals(properties.get("factory.name")) &&
-                !Constants.UNSECURED_CONSOLE_PID.equals(properties.get("factory.name"))) {
+        if (!Constants.PRODUCTION_MODE_CONSOLE_PID.equals(properties.get("factory.name")) &&
+                !Constants.DEVELOPMENT_MODE_CONSOLE_PID.equals(properties.get("factory.name"))) {
             return;
         }
-        properties.put(Constants.ENABLE_SECURITY, ((String) properties.get("instance.name")).contains(Constants.SECURED_CONSOLE_PID));
+        properties.put(Constants.ENABLE_SECURITY, ((String) properties.get("instance.name")).contains(Constants.PRODUCTION_MODE_CONSOLE_PID));
         // Create an UI provider for the console UI
         UIProvider uiProvider = uiProviderFactory.createUIProvider(properties);
         // Create a servlet
