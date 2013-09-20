@@ -12,7 +12,9 @@
 package com.peergreen.webconsole.community;
 
 import javax.servlet.ServletException;
+import java.io.IOException;
 import java.util.Dictionary;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -22,6 +24,8 @@ import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Unbind;
+import org.osgi.service.cm.Configuration;
+import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
 
@@ -53,6 +57,16 @@ public class CommunityConsoleFactory {
     private UIProviderFactory uiProviderFactory;
 
     private List<String> aliases = new CopyOnWriteArrayList<>();
+
+    public CommunityConsoleFactory(@Requires ConfigurationAdmin configurationAdmin) throws IOException {
+        // Create default instance
+        Configuration configuration = configurationAdmin.createFactoryConfiguration(Constants.DEVELOPMENT_MODE_CONSOLE_PID, null);
+        Dictionary<String, String> properties = new Hashtable<>();
+        properties.put("console.name", "Peergreen Administration Console");
+        properties.put("console.alias", "/admin");
+        properties.put("default.roles", "admin");
+        configuration.update(properties);
+    }
 
     /**
      * Bind a console
