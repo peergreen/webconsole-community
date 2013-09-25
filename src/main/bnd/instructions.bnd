@@ -7,7 +7,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Import-Package org.slf4j;resolution:=optional,*;resolution:=optional
+Import-Package org.slf4j;resolution:=optional,\
+               *;resolution:=optional
+
+# Only for the Shell bundle
+DynamicImport-Package org.apache.felix.service.*;status=provisional
 
 Embed-Dependency *;scope=compile|runtime
 
