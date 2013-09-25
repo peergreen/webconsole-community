@@ -24,10 +24,13 @@ import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Invalidate;
 import org.apache.felix.ipojo.annotations.Requires;
 import org.apache.felix.ipojo.annotations.Unbind;
+import org.osgi.framework.InvalidSyntaxException;
 import org.osgi.service.cm.Configuration;
 import org.osgi.service.cm.ConfigurationAdmin;
 import org.osgi.service.http.HttpService;
 import org.osgi.service.http.NamespaceException;
+import org.ow2.util.log.Log;
+import org.ow2.util.log.LogFactory;
 
 import com.peergreen.webconsole.Constants;
 import com.peergreen.webconsole.IConsole;
@@ -45,6 +48,11 @@ import com.vaadin.server.UIProvider;
 public class CommunityConsoleFactory {
 
     /**
+     * Logger.
+     */
+    private static final Log LOGGER = LogFactory.getLog(CommunityConsoleFactory.class);
+
+    /**
      * Http Service
      */
     @Requires
@@ -60,12 +68,25 @@ public class CommunityConsoleFactory {
 
     public CommunityConsoleFactory(@Requires ConfigurationAdmin configurationAdmin) throws IOException {
         // Create default instance
-        Configuration configuration = configurationAdmin.createFactoryConfiguration(Constants.DEVELOPMENT_MODE_CONSOLE_PID, null);
-        Dictionary<String, String> properties = new Hashtable<>();
-        properties.put("console.name", "Peergreen Administration Console");
-        properties.put("console.alias", "/admin");
-        properties.put("default.roles", "admin");
-        configuration.update(properties);
+        if (!isDefaultConsolePresent(configurationAdmin)) {
+            Configuration configuration = configurationAdmin.createFactoryConfiguration(Constants.DEVELOPMENT_MODE_CONSOLE_PID, null);
+            Dictionary<String, String> properties = new Hashtable<>();
+            properties.put("console.name", "Peergreen Administration Console");
+            properties.put("console.alias", "/admin");
+            properties.put("default.roles", "admin");
+            configuration.update(properties);
+        }
+    }
+
+    private boolean isDefaultConsolePresent(ConfigurationAdmin configurationAdmin) {
+        String filter = String.format("(&(%s=%s)(%s=%s))", ConfigurationAdmin.SERVICE_FACTORYPID, Constants.DEVELOPMENT_MODE_CONSOLE_PID, "console.alias", "/admin");
+        try {
+            Configuration[] configurations = configurationAdmin.listConfigurations(filter);
+            return configurations != null && configurations.length != 0;
+        } catch (IOException | InvalidSyntaxException e) {
+            LOGGER.error("Fail to get default configuration for webconsole", e);
+            return false;
+        }
     }
 
     /**
@@ -91,6 +112,7 @@ public class CommunityConsoleFactory {
             aliases.add(alias);
         } catch (ServletException | NamespaceException e) {
             // ignore update
+            LOGGER.warn(e);
         }
     }
 
